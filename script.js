@@ -19,3 +19,30 @@ if (!Function.prototype.bind()) {
         }
     }
 }
+
+
+
+// Implementation of JavaScript built-in map() array method as a polyfill
+
+let array = [1,2,3,4];
+
+// Simulating that map method is not supported
+Array.prototype.map = null;
+
+if (!Array.prototype.map) {
+    Array.prototype.map = function (callbackFunction) {
+        let resultArray = [];
+        let targetArray = this;
+        for (let i = 0; i < targetArray.length; i++) {
+            resultArray.push(callbackFunction(targetArray[i]))
+        }
+        return resultArray;
+    }
+}
+
+
+let double = array.map(function(element) {
+    return element * 2;
+})
+
+console.log(double)
